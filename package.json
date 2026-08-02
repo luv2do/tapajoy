@@ -1,9 +1,13 @@
 {
-  "name": "tapajoy-ultimate-solver",
+  "name": "jumbleverse-backend",
   "version": "1.0.0",
-  "description": "Luxury Neon Jumble Solver with High-Speed Streaming Backend",
+  "description": "Jumbleverse High Performance Word Solver Core",
   "main": "api/index.js",
+  "scripts": {
+    "start": "node api/index.js"
+  },
   "dependencies": {
-    "an-array-of-english-words": "latest"
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
   }
 }
