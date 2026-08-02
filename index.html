@@ -7,173 +7,153 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #000; color: #00ff00; font-family: 'Courier New', Courier, monospace; padding: 15px; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        
         .page-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; gap: 15px; }
-        
-        /* ৫টি ডেডিকেটেড রেসপনসিভ অ্যাড জোন */
         .top-ad-zone { width: 100%; max-width: 728px; min-height: 90px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
         .main-content-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; align-items: flex-start; max-width: 100%; }
-        
         .sidebar-ad-zone { width: 160px; height: 600px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; flex-shrink: 0; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
-        
-        /* সেন্ট্রাল কন্টেইনার - নিয়ন গ্রিন + গোল্ডেন মিক্স গলো */
         .container { flex: 1; max-width: 750px; width: 100%; border: 3px solid #00ff00; padding: 25px; box-shadow: 0 0 25px #00ff00, inset 0 0 15px #ffd700; border-radius: 10px; background: #030303; text-align: center; overflow: hidden; }
         h1 { font-size: 2.6rem; margin-bottom: 25px; letter-spacing: 5px; text-shadow: 0 0 15px #00ff00, 0 0 5px #ffd700; color: #ffd700; font-weight: bold; word-wrap: break-word; }
-        
         .input-group { display: flex; gap: 10px; justify-content: center; margin-bottom: 12px; width: 100%; max-width: 100%; }
         input { background: #000; border: 2px solid #00ff00; color: #ffd700; padding: 14px 15px; font-size: 1.2rem; font-family: inherit; flex: 1; min-width: 0; outline: none; border-radius: 5px; text-shadow: 0 0 5px #ffd700; }
         input:focus { border-color: #ffd700; box-shadow: 0 0 20px #ffd700, inset 0 0 5px #00ff00; }
-        
         button { background: #ffd700; color: #000; border: none; padding: 14px 22px; font-size: 1.1rem; font-weight: bold; font-family: inherit; cursor: pointer; border-radius: 5px; transition: 0.3s; box-shadow: 0 0 15px #ffd700; flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
         button:hover, button:active { background: #000; color: #00ff00; border: 2px solid #00ff00; box-shadow: 0 0 20px #00ff00; }
-        
         .notice { font-size: 0.85rem; color: #666; margin-bottom: 20px; letter-spacing: 1px; }
         .error-box { border: 2px dashed #ff0000; color: #ff0000; padding: 15px; margin-top: 20px; border-radius: 5px; display: none; background: #100000; text-align: left; box-shadow: 0 0 10px #ff0000; word-wrap: break-word; }
         .error-title { font-weight: bold; margin-bottom: 8px; }
-        .slang-list { list-style: none; padding-left: 10px; }
-        .slang-item { margin-bottom: 5px; font-size: 0.85rem; }
-        
-        /* রেজাল্ট এরিয়া */
         .results-container { margin-top: 25px; text-align: left; width: 100%; }
         .length-section { margin-bottom: 15px; border: 1px solid #ffd700; padding: 12px; border-radius: 5px; background: #050505; box-shadow: 0 0 10px #003300, inset 0 0 5px #ffd700; width: 100%; overflow: hidden; }
         .length-title { font-size: 1.15rem; font-weight: bold; border-bottom: 1px solid #00ff00; padding-bottom: 5px; margin-bottom: 12px; color: #ffd700; text-shadow: 0 0 5px #ffd700; }
         .word-grid { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
         .word-card { background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 6px 12px; border-radius: 4px; font-size: 1.05rem; box-shadow: 0 0 5px #004400; max-width: 100%; word-break: break-all; }
-        
         .loading { font-size: 1.1rem; color: #ffff00; margin: 20px 0; display: block; text-shadow: 0 0 5px #ffff00; }
         .no-results { color: #ff9900; margin: 20px 0; font-size: 1rem; text-shadow: 0 0 5px #ff9900; }
-        
         .bottom-ad-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
         .bottom-ad-zone { width: 300px; height: 250px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
-
-        @media (max-width: 992px) {
-            .sidebar-ad-zone { display: none !important; }
-            h1 { font-size: 2.2rem; }
-        }
-        @media (max-width: 480px) {
-            .input-group { flex-direction: column; gap: 10px; align-items: center; }
-            input { width: 100%; text-align: center; padding: 14px; }
-            button { width: 100%; padding: 14px; }
-            h1 { font-size: 1.9rem; letter-spacing: 2px; }
-            .top-ad-zone { min-height: 60px; font-size: 0.7rem; }
-            .bottom-ad-zone { width: 100%; max-width: 300px; }
-        }
+        @media (max-width: 992px) { .sidebar-ad-zone { display: none !important; } h1 { font-size: 2.2rem; } }
+        @media (max-width: 480px) { .input-group { flex-direction: column; gap: 10px; align-items: center; } input { width: 100%; text-align: center; padding: 14px; } button { width: 100%; padding: 14px; } h1 { font-size: 1.9rem; letter-spacing: 2px; } .top-ad-zone { min-height: 60px; font-size: 0.7rem; } .bottom-ad-zone { width: 100%; max-width: 300px; } }
     </style>
 </head>
 <body>
-
 <div class="page-wrapper">
     <div class="top-ad-zone">PLACE_TOP_AD_HERE</div>
-
     <div class="main-content-wrapper">
         <div class="sidebar-ad-zone">PLACE_LEFT_SIDEBAR_AD_HERE</div>
-
         <div class="container">
             <h1>JUMBLEVERSE</h1>
-            
-            <div class="input-group">
+            <form class="input-group" id="jumbleForm" onsubmit="event.preventDefault(); processJumble();">
                 <input type="text" id="jumbleInput" placeholder="Enter scrambled letters..." autocomplete="off" inputmode="text" enterkeyhint="search" maxlength="15">
-                <button id="solveBtn" onclick="processJumble()">SOLVE IT</button>
-            </div>
+                <button type="submit" id="solveBtn">SOLVE IT</button>
+            </form>
             <div class="notice" id="noticeText">* ALLOWED: MIN 2 & MAX 15 LETTERS</div>
-
             <div id="loadingStatus" class="loading">CONNECTING NEON CORE...</div>
-
             <div id="errorBox" class="error-box">
                 <div id="errorBoxTitle" class="error-title">⚠️ SYSTEM ALERT</div>
-                <ul id="slangList" class="slang-list"></ul>
+                <div id="errorMsg"></div>
             </div>
-
             <div id="resultsArea" class="results-container"></div>
         </div>
-
         <div class="sidebar-ad-zone">PLACE_RIGHT_SIDEBAR_AD_HERE</div>
     </div>
-
     <div class="bottom-ad-wrapper">
         <div class="bottom-ad-zone">PLACE_BOTTOM_AD_1_HERE</div>
         <div class="bottom-ad-zone">PLACE_BOTTOM_AD_2_HERE</div>
     </div>
 </div>
-
 <script>
     let words = [];
     const signatureMap = {};
     const badWords = ['penis', 'peni', 'sex', 'fuck', 'ass', 'bitch'];
 
-    // ৩ লাখ শব্দের অফিশিয়াল ডিকশনারি ডাটা সরাসরি রিয়েল-টাইমে সিঙ্ক করা হচ্ছে
     window.addEventListener('DOMContentLoaded', async () => {
         const loadingStatus = document.getElementById('loadingStatus');
         try {
-            const res = await fetch('https://jsdelivr.net');
-            words = await res.json();
-            
+            const res = await fetch('https://githubusercontent.com');
+            const data = await res.json();
+            words = Object.keys(data);
             words.forEach((word) => {
                 const cleanWord = word.toLowerCase().trim();
-                if (cleanWord.length < 2 || cleanWord.length > 7) return;
+                if (cleanWord.length < 2 || cleanWord.length > 15) return;
                 const signature = cleanWord.split('').sort().join('');
-                if (!signatureMap[signature]) {
-                    signatureMap[signature] = [];
-                }
-                signatureMap[signature].push(cleanWord);
+                if (!signatureMap[signature]) { signatureMap[signature] = []; }
+                if (!signatureMap[signature].includes(cleanWord)) { signatureMap[signature].push(cleanWord); }
             });
             loadingStatus.style.display = 'none';
         } catch (e) {
             loadingStatus.innerText = "MATRIX ERROR. PLEASE REFRESH.";
+            console.error(e);
         }
     });
 
     document.getElementById('jumbleInput').addEventListener('input', function(e) {
-        if (this.value.length > 15) {
-            this.value = this.value.slice(0, 15);
-        }
+        if (this.value.length > 15) { this.value = this.value.slice(0, 15); }
     });
 
+    function getSubsets(letters) {
+        let results = new Set();
+        const f = (prefix, chars) => {
+            for (let i = 0; i < chars.length; i++) {
+                let nextPrefix = prefix + chars[i];
+                if (nextPrefix.length >= 2) {
+                    let sig = nextPrefix.split('').sort().join('');
+                    if (signatureMap[sig]) { signatureMap[sig].forEach(w => results.add(w)); }
+                }
+                f(nextPrefix, chars.slice(0, i).concat(chars.slice(i + 1)));
+            }
+        };
+        f('', letters.split(''));
+        return Array.from(results);
+    }
     function processJumble() {
         const inputField = document.getElementById('jumbleInput');
         const resultsArea = document.getElementById('resultsArea');
         const errorBox = document.getElementById('errorBox');
-        const errorBoxTitle = document.getElementById('errorBoxTitle');
-        const slangList = document.getElementById('slangList');
-        const loadingStatus = document.getElementById('loadingStatus');
-
-        const inputValue = inputField.value.trim().toLowerCase();
-        
+        const errorMsg = document.getElementById('errorMsg');
         resultsArea.innerHTML = '';
         errorBox.style.display = 'none';
-        slangList.innerHTML = '';
-
-        if (inputValue.length < 2 || inputValue.length > 15) {
+        let inputVal = inputField.value.toLowerCase().replace(/[^a-z]/g, '').trim();
+        if (inputVal.length < 2 || inputVal.length > 15) {
             errorBox.style.display = 'block';
-            errorBoxTitle.innerText = "⚠️ INPUT ERROR DETECTED";
-            const li = document.createElement('li');
-            li.className = 'slang-item';
-            li.innerText = "▲ SYSTEM LOCKED: Input must be between 2 and 15 letters only.";
-            slangList.appendChild(li);
+            errorMsg.innerText = "Error: Input must be between 2 and 15 alphabetic letters.";
             return;
         }
-
-        inputField.blur(); 
-        loadingStatus.style.display = 'block';
-
-        // লোকাল ব্রাউজার প্রসেসর ইঞ্জিন (০ সেকেন্ড ট্রিপ মেথড)
-        setTimeout(() => {
-            const inputLen = inputValue.length;
-            const resultsByLength = {};
-
-            const inputCounts = {};
-            for (const char of inputValue) {
-                inputCounts[char] = (inputCounts[char] || 0) + 1;
-            }
-
-            let hasWords = false;
-            let detectedBadWords = [];
-
-            for (const signature in signatureMap) {
-                if (signature.length > inputLen) continue;
-
-                let isMatch = true;
-                const sigCounts = {};
-                for (const char of signature) {
-                    sigCounts[char] = (sigCounts[char] || 0) + 1;
-if (!inputCounts[char] || sigCounts[char] > inputCounts[char]) {isMatch = false;break;}}if (isMatch) {const wordLen = signature.length;if (!resultsByLength[wordLen]) {resultsByLength[wordLen] = [];}resultsByLength[wordLen].push(...signatureMap[signature]);}}loadingStatus.style.display = 'none';const sortedLengths = Object.keys(resultsByLength).sort((a, b) => b - a);sortedLengths.forEach(length => {const wordsArray = resultsByLength[length] || [];const cleanWords = wordsArray.filter(word => {if (badWords.includes(word.toLowerCase())) {if (!detectedBadWords.includes(word.toUpperCase())) {detectedBadWords.push(word.toUpperCase());}return false;}return true;});if (cleanWords.length > 0) {hasWords = true;const section = document.createElement('div');section.className = 'length-section';const title = document.createElement('div');title.className = 'length-title';title.innerText = ${length} LETTER WORDS (${cleanWords.length});const grid = document.createElement('div');grid.className = 'word-grid';cleanWords.forEach(word => {const card = document.createElement('div');card.className = 'word-card';card.innerText = word.toUpperCase();grid.appendChild(card);});section.appendChild(title);section.appendChild(grid);resultsArea.appendChild(section);}});if (detectedBadWords.length > 0) {errorBox.style.display = 'block';errorBoxTitle.innerText = "⚠️ HEX OFFENSIVE WORDS DETECTED";detectedBadWords.forEach(slang => {const li = document.createElement('li');li.className = 'slang-item';li.innerText = ▲ SLANG DETECTED & FILTERED: ${slang};slangList.appendChild(li);});}if (!hasWords) {resultsArea.innerHTML = 'No meaningful words (2-7 letters) found for these letters.';}}, 20);}document.getElementById('jumbleInput').addEventListener('keydown', function(e) {if (e.key === 'Enter') {e.preventDefault();processJumble();}});
+        let containsBadWord = badWords.some(bad => inputVal.includes(bad));
+        if (containsBadWord) {
+            errorBox.style.display = 'block';
+            errorMsg.innerText = "System Alert: Inappropriate language detected.";
+            return;
+        }
+        let matchedWords = getSubsets(inputVal);
+        if (matchedWords.length === 0) {
+            resultsArea.innerHTML = '<div class="no-results">NO COMBINATIONS FOUND IN THE NEON CORE.</div>';
+            return;
+        }
+        matchedWords.sort((a, b) => b.length - a.length || a.localeCompare(b));
+        let groups = {};
+        matchedWords.forEach(word => {
+            let len = word.length;
+            if (!groups[len]) groups[len] = [];
+            groups[len].push(word);
+        });
+        for (let len in groups) {
+            let section = document.createElement('div');
+            section.className = 'length-section';
+            let title = document.createElement('div');
+            title.className = 'length-title';
+            title.innerText = len + " LETTER WORDS";
+            section.appendChild(title);
+            let grid = document.createElement('div');
+            grid.className = 'word-grid';
+            groups[len].forEach(word => {
+                let card = document.createElement('div');
+                card.className = 'word-card';
+                card.innerText = word.toUpperCase();
+                grid.appendChild(card);
+            });
+            section.appendChild(grid);
+            resultsArea.appendChild(section);
+        }
+    }
+</script>
+</body>
+</html>
