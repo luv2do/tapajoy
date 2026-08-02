@@ -68,7 +68,7 @@
             <h1>JUMBLEVERSE</h1>
             
             <div class="input-group">
-                <!-- ১৫ অক্ষরের টাইপিং রেস্ট্রিকশন ও কীবোর্ড অ্যাক্টিভেশন লক -->
+                <!-- ১৫ অক্ষরের ইনপুট টাইপিং ক্যাচ এবং ম্যাক্স লেংথ লক প্রোটেকশন -->
                 <input type="text" id="jumbleInput" placeholder="Enter scrambled letters..." autocomplete="off" inputmode="text" enterkeyhint="search" maxlength="15">
                 <button id="solveBtn" onclick="processJumble()">SOLVE IT</button>
             </div>
@@ -96,7 +96,7 @@
 <script>
     const badWords = ['penis', 'peni', 'sex', 'fuck', 'ass', 'bitch'];
 
-    // রিয়েলটাইম কিবোর্ড টাইপিং লক (১৫ অক্ষরের বেশি টাইপই করা যাবে না)
+    // ১৫ অক্ষরের বেশি ইনপুট টাইপ করা ব্লক করার কড়া লজিক
     document.getElementById('jumbleInput').addEventListener('input', function(e) {
         if (this.value.length > 15) {
             this.value = this.value.slice(0, 15);
@@ -117,13 +117,13 @@
         errorBox.style.display = 'none';
         slangList.innerHTML = '';
 
-        // কড়া ইনপুট কন্ডিশন লক (২-১৫ অক্ষরের বাইরে সার্চ ব্লক)
+        // ফ্রন্টএন্ড লেভেল কড়া ইনপুট লক (২-১৫ অক্ষরের রেঞ্জ লক)
         if (inputValue.length < 2 || inputValue.length > 15) {
             errorBox.style.display = 'block';
             errorBoxTitle.innerText = "⚠️ INPUT ERROR DETECTED";
             const li = document.createElement('li');
             li.className = 'slang-item';
-            li.innerText = "▲ ACTION BLOCKED: Letters must be between 2 and 15.";
+            li.innerText = "▲ SYSTEM LOCKED: Input must be between 2 and 15 letters only.";
             slangList.appendChild(li);
             return;
         }
@@ -132,7 +132,7 @@
         loadingStatus.style.display = 'block';
 
         try {
-            // রিয়েল নোড ব্যাকএন্ড এন্ডপয়েন্ট কানেকশন
+            // Vercel-এর গ্লোবাল নোড এন্ডপয়েন্ট কানেকশন পাথ
             const response = await fetch(`/api?input=${encodeURIComponent(inputValue)}`);
             if (!response.ok) throw new Error('Network error or server limit');
             
@@ -147,7 +147,7 @@
             sortedLengths.forEach(length => {
                 const wordLengthNum = parseInt(length);
                 
-                // লক আর্কিটেকচার: শুধুমাত্র ২ থেকে ৭ অক্ষরের জেনারেটেড শব্দ দেখানো হবে
+                // শুধুমাত্র ২ থেকে ৭ অক্ষরের অর্থপূর্ণ জেনারেটেড শব্দ ফিল্টারিং লক
                 if (wordLengthNum >= 2 && wordLengthNum <= 7) {
                     const wordsArray = data[length] || [];
                     

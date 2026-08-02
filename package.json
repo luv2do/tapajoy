@@ -1,6 +1,7 @@
 {
-  "name": "jumbler",
+  "name": "tapajoy-solver",
   "version": "1.0.0",
+  "description": "Luxury Neon Jumble Solver With Locks",
   "main": "api/index.js",
   "dependencies": {
     "an-array-of-english-words": "latest"
