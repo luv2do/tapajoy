@@ -8,30 +8,27 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: #000; color: #00ff00; font-family: 'Courier New', Courier, monospace; padding: 15px; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
         
-        /* পেজ লেআউট ও লাক্সারি লাইটিং */
         .page-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; gap: 15px; }
         
-        /* ১. উপরের ব্যানার (728x90) */
+        /* ১/৫ অ্যাড জোন: টপ ব্যানার (728x90) */
         .top-ad-zone { width: 100%; max-width: 728px; min-height: 90px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
         .main-content-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; align-items: flex-start; max-width: 100%; }
         
-        /* ২ ও ৩. দুই পাশের সাইডবার (160x600) */
+        /* ২ ও ৩/৫ অ্যাড জোন: দুই পাশের সাইডবার (160x600) */
         .sidebar-ad-zone { width: 160px; height: 600px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; flex-shrink: 0; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
         
-        /* সেন্ট্রাল কন্টেইনার - নিয়ন গ্রিন + গোল্ডেন মিক্স গ্লো */
+        /* সেন্ট্রাল কন্টেইনার - নিয়ন গ্রিন + গোল্ডেন মিক্স গলো */
         .container { flex: 1; max-width: 750px; width: 100%; border: 3px solid #00ff00; padding: 25px; box-shadow: 0 0 25px #00ff00, inset 0 0 15px #ffd700; border-radius: 10px; background: #030303; text-align: center; overflow: hidden; }
         h1 { font-size: 2.6rem; margin-bottom: 25px; letter-spacing: 5px; text-shadow: 0 0 15px #00ff00, 0 0 5px #ffd700; color: #ffd700; font-weight: bold; word-wrap: break-word; }
         
-        /* ইনপুট গ্রুপ এবং নিয়নে গোল্ডেন বর্ডার ফোকাস */
         .input-group { display: flex; gap: 10px; justify-content: center; margin-bottom: 12px; width: 100%; max-width: 100%; }
         input { background: #000; border: 2px solid #00ff00; color: #ffd700; padding: 14px 15px; font-size: 1.2rem; font-family: inherit; flex: 1; min-width: 0; outline: none; border-radius: 5px; text-shadow: 0 0 5px #ffd700; }
         input:focus { border-color: #ffd700; box-shadow: 0 0 20px #ffd700, inset 0 0 5px #00ff00; }
         
-        /* গোল্ডেন নিয়ন বাটন */
         button { background: #ffd700; color: #000; border: none; padding: 14px 22px; font-size: 1.1rem; font-weight: bold; font-family: inherit; cursor: pointer; border-radius: 5px; transition: 0.3s; box-shadow: 0 0 15px #ffd700; flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
         button:hover, button:active { background: #000; color: #00ff00; border: 2px solid #00ff00; box-shadow: 0 0 20px #00ff00; }
         
-        .notice { font-size: 0.85rem; color: #666; margin-bottom: 20px; letter-spacing: 1px; text-shadow: 0 0 2px #000; }
+        .notice { font-size: 0.85rem; color: #666; margin-bottom: 20px; letter-spacing: 1px; }
         .error-box { border: 2px dashed #ff0000; color: #ff0000; padding: 15px; margin-top: 20px; border-radius: 5px; display: none; background: #100000; text-align: left; box-shadow: 0 0 10px #ff0000; word-wrap: break-word; }
         .error-title { font-weight: bold; margin-bottom: 8px; }
         .slang-list { list-style: none; padding-left: 10px; }
@@ -47,11 +44,10 @@
         .loading { font-size: 1.1rem; color: #ffff00; margin: 20px 0; display: none; text-shadow: 0 0 5px #ffff00; }
         .no-results { color: #ff9900; margin: 20px 0; font-size: 1rem; text-shadow: 0 0 5px #ff9900; }
         
-        /* ৪ ও ৫. নিচের দুটি ব্যানার (300x250) */
+        /* ৪ ও ৫/৫ অ্যাড জোন: বটম ব্যানারস (300x250) */
         .bottom-ad-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
         .bottom-ad-zone { width: 300px; height: 250px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
 
-        /* ক্রস-ডিভাইস রেসপনসিভ ফিক্স */
         @media (max-width: 992px) {
             .sidebar-ad-zone { display: none !important; }
             h1 { font-size: 2.2rem; }
@@ -69,18 +65,15 @@
 <body>
 
 <div class="page-wrapper">
-    <!-- ১/৫ অ্যাড জোন: টপ ব্যানার (728x90) -->
     <div class="top-ad-zone">
         PLACE_TOP_AD_HERE
     </div>
 
     <div class="main-content-wrapper">
-        <!-- ২/৫ অ্যাড জোন: লেফট স্কাইস্ক্র্যাপার (160x600) -->
         <div class="sidebar-ad-zone">
             PLACE_LEFT_SIDEBAR_AD_HERE
         </div>
 
-        <!-- লাক্সারি নিয়ন + গোল্ডেন সলভ কন্টেইনার -->
         <div class="container">
             <h1>JUMBLEVERSE</h1>
             
@@ -88,25 +81,23 @@
                 <input type="text" id="jumbleInput" placeholder="Enter scrambled letters..." autocomplete="off" inputmode="text" enterkeyhint="search">
                 <button id="solveBtn" onclick="processJumble()">SOLVE IT</button>
             </div>
-            <div class="notice">* MAXIMUM 17 LETTERS ALLOWED</div>
+            <div class="notice">* ALLOWED: MIN 2 & MAX 15 LETTERS</div>
 
             <div id="loadingStatus" class="loading">SCANNING CODES & DICTIONARY...</div>
 
             <div id="errorBox" class="error-box">
-                <div class="error-title">⚠️ HEX OFFENSIVE WORDS DETECTED</div>
+                <div id="errorBoxTitle" class="error-title">⚠️ HEX OFFENSIVE WORDS DETECTED</div>
                 <ul id="slangList" class="slang-list"></ul>
             </div>
 
             <div id="resultsArea" class="results-container"></div>
         </div>
 
-        <!-- ৩/৫ অ্যাড জোন: রাইট স্কাইস্ক্র্যাপার (160x600) -->
         <div class="sidebar-ad-zone">
             PLACE_RIGHT_SIDEBAR_AD_HERE
         </div>
     </div>
 
-    <!-- ৪/৫ এবং ৫/৫ অ্যাড জোন: বটম ব্যানারস (300x250) -->
     <div class="bottom-ad-wrapper">
         <div class="bottom-ad-zone">
             PLACE_BOTTOM_AD_1_HERE
@@ -124,6 +115,7 @@
         const inputField = document.getElementById('jumbleInput');
         const resultsArea = document.getElementById('resultsArea');
         const errorBox = document.getElementById('errorBox');
+        const errorBoxTitle = document.getElementById('errorBoxTitle');
         const slangList = document.getElementById('slangList');
         const loadingStatus = document.getElementById('loadingStatus');
 
@@ -133,16 +125,23 @@
         errorBox.style.display = 'none';
         slangList.innerHTML = '';
 
-        if (!inputValue) {
-            resultsArea.innerHTML = '<div class="no-results">Please enter some letters first!</div>';
+        // ১. ইনপুট লক কন্ডিশন (২ থেকে ১৫ অক্ষরের নিয়ম প্রয়োগ)
+        if (inputValue.length < 2 || inputValue.length > 15) {
+            errorBox.style.display = 'block';
+            errorBoxTitle.innerText = "⚠️ INPUT ERROR DETECTED";
+            const li = document.createElement('li');
+            li.className = 'slang-item';
+            li.innerText = "▲ SYSTEM LOCKED: Input must be between 2 and 15 letters only.";
+            slangList.appendChild(li);
             return;
         }
 
-        inputField.blur(); // মোবাইল কিবোর্ড ক্লোজ ট্রিগার
+        inputField.blur(); 
         loadingStatus.style.display = 'block';
 
         try {
-            const response = await fetch(`/api/solve?input=${encodeURIComponent(inputValue)}`);
+            // সংশোধিত রিয়েল কানেকশন এন্ডপয়েন্ট (api/index.js ফাইলের জন্য)
+            const response = await fetch(`/api?input=${encodeURIComponent(inputValue)}`);
             if (!response.ok) throw new Error('Network error or server limit');
             
             const data = await response.json();
@@ -154,30 +153,27 @@
             const sortedLengths = Object.keys(data).sort((a, b) => b - a);
 
             sortedLengths.forEach(length => {
-                const wordsArray = data[length] || [];
+                const wordLengthNum = parseInt(length);
                 
-                const cleanWords = wordsArray.filter(word => {
-                    if (badWords.includes(word.toLowerCase())) {
-                        if (!detectedBadWords.includes(word.toUpperCase())) {
-                            detectedBadWords.push(word.toUpperCase());
+                // ২. শব্দের দৈর্ঘ্য ফিল্টার (শুধুমাত্র ২ থেকে ৭ অক্ষরের শব্দ স্ক্রিনে আসবে)
+                if (wordLengthNum >= 2 && wordLengthNum <= 7) {
+                    const wordsArray = data[length] || [];
+                    
+                    const cleanWords = wordsArray.filter(word => {
+                        if (badWords.includes(word.toLowerCase())) {
+                            if (!detectedBadWords.includes(word.toUpperCase())) {
+                                detectedBadWords.push(word.toUpperCase());
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                    return true;
-                });
+                        return true;
+                    });
 
-                if (cleanWords.length > 0) {
-                    hasWords = true;
-                    
-                    const section = document.createElement('div');
-                    section.className = 'length-section';
-                    
-                    const title = document.createElement('div');
-                    title.className = 'length-title';
-                    title.innerText = `${length} LETTER WORDS (${cleanWords.length})`;
-                    
-                    const grid = document.createElement('div');
-                    grid.className = 'word-grid';
-                    
-                    cleanWords.forEach(word => {
-const card = document.createElement('div');card.className = 'word-card';card.innerText = word.toUpperCase();grid.appendChild(card);});section.appendChild(title);section.appendChild(grid);resultsArea.appendChild(section);}});if (detectedBadWords.length > 0) {errorBox.style.display = 'block';detectedBadWords.forEach(slang => {const li = document.createElement('li');li.className = 'slang-item';li.innerText = ▲ SLANG DETECTED & FILTERED: ${slang};slangList.appendChild(li);});}if (!hasWords) {resultsArea.innerHTML = 'No meaningful words found for these letters.';}} catch (error) {loadingStatus.style.display = 'none';resultsArea.innerHTML = <div class="no-results" style="color:red;">Error connecting to solver system: ${error.message}</div>;}}/* 💻📱 Windows, Android, iOS সব ডিভাইসে এন্টার কি বাইন্ডিং */document.getElementById('jumbleInput').addEventListener('keydown', function(e) {if (e.key === 'Enter') {e.preventDefault();processJumble();}});
+                    if (cleanWords.length > 0) {
+                        hasWords = true;
+                        
+                        const section = document.createElement('div');
+                        section.className = 'length-section';
+                        
+                        const title = document.createElement('div');
+title.className = 'length-title';title.innerText = ${length} LETTER WORDS (${cleanWords.length});const grid = document.createElement('div');grid.className = 'word-grid';cleanWords.forEach(word => {const card = document.createElement('div');card.className = 'word-card';card.innerText = word.toUpperCase();grid.appendChild(card);});section.appendChild(title);section.appendChild(grid);resultsArea.appendChild(section);}}});if (detectedBadWords.length > 0) {errorBox.style.display = 'block';errorBoxTitle.innerText = "⚠️ HEX OFFENSIVE WORDS DETECTED";detectedBadWords.forEach(slang => {const li = document.createElement('li');li.className = 'slang-item';li.innerText = ▲ SLANG DETECTED & FILTERED: ${slang};slangList.appendChild(li);});}if (!hasWords) {resultsArea.innerHTML = 'No meaningful words (2-7 letters) found for these letters.';}} catch (error) {loadingStatus.style.display = 'none';resultsArea.innerHTML = <div class="no-results" style="color:red;">Error connecting to solver system: ${error.message}</div>;}}document.getElementById('jumbleInput').addEventListener('keydown', function(e) {if (e.key === 'Enter') {e.preventDefault();processJumble();}});
