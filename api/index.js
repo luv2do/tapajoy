@@ -1,9 +1,8 @@
 const words = require('an-array-of-english-words');
 
-// ১. মেমোরিতে শব্দ সাজিয়ে রাখার ইনডেক্স বক্স
 const signatureMap = {};
 
-// ২. ডিকশনারি প্রসেস করার নিয়ম
+// ডিকশনারি ডাটা মেমোরি ইনডেক্সিং (২ থেকে ৭ অক্ষরের শব্দ লক)
 words.forEach((word) => {
     const cleanWord = word.toLowerCase().trim();
     if (!cleanWord) return;
@@ -14,11 +13,20 @@ words.forEach((word) => {
     signatureMap[signature].push(cleanWord);
 });
 
-// ৩. আসল সলভার ফাংশন
-function solveJumble(input) {
+// Vercel নোড ক্লাউড রিকোয়েস্ট ইন্টারফেস
+module.exports = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader('Content-Type', 'application/json');
+
+    const input = req.query.input || '';
     const cleanInput = input.trim().toLowerCase();
     const inputLen = cleanInput.length;
     const resultsByLength = {};
+
+    if (inputLen < 2 || inputLen > 15) {
+        return res.status(200).json({});
+    }
 
     const inputCounts = {};
     for (const char of cleanInput) {
@@ -26,7 +34,8 @@ function solveJumble(input) {
     }
 
     for (const signature in signatureMap) {
-        if (signature.length > inputLen) continue;
+        // ব্যাকএন্ড লেভেলে ২-৭ অক্ষরের কঠোর ফিল্টারিং লক
+        if (signature.length < 2 || signature.length > 7 || signature.length > inputLen) continue;
 
         let isMatch = true;
         const sigCounts = {};
@@ -47,8 +56,5 @@ function solveJumble(input) {
         }
     }
 
-    return resultsByLength;
-}
-
-// Vercel-এর জন্য এক্সপোর্ট আর্কিটেকচার
-module.exports = { solveJumble };
+    return res.status(200).json(resultsByLength);
+};
