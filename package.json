@@ -1,0 +1,8 @@
+{
+  "name": "jumbler",
+  "version": "1.0.0",
+  "main": "api/index.js",
+  "dependencies": {
+    "an-array-of-english-words": "latest"
+  }
+}
