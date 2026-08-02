@@ -1,7 +1,7 @@
 {
-  "name": "tapajoy-solver",
+  "name": "tapajoy-ultimate-solver",
   "version": "1.0.0",
-  "description": "Luxury Neon Jumble Solver With Locks",
+  "description": "Luxury Neon Jumble Solver with Global Cache Backend",
   "main": "api/index.js",
   "dependencies": {
     "an-array-of-english-words": "latest"
