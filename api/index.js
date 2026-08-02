@@ -1,29 +1,27 @@
 const words = require('an-array-of-english-words');
 
-// ক্লাউড মেমোরি ক্যাশিং বক্স (সার্ভার ডাউন এবং টাইমআউট প্রতিরোধের মূল চাবিকাঠি)
-let isIndexed = false;
 const signatureMap = {};
+let isReady = false;
 
-function initializeDictionary() {
-    if (isIndexed) return;
-    words.forEach((word) => {
-        const cleanWord = word.toLowerCase().trim();
-        // ব্যাকএন্ড লেভেলে ২ থেকে ৭ অক্ষরের কঠোর লক
-        if (cleanWord.length < 2 || cleanWord.length > 7) return;
-        const signature = cleanWord.split('').sort().join('');
-        if (!signatureMap[signature]) {
-            signatureMap[signature] = [];
+// ক্লাউড ফাংশন বুট হওয়ার সময় ব্যাকগ্রাউন্ডে ৩ লাখ শব্দ প্রসেস করার মেথড
+function prepareDictionary() {
+    if (isReady) return;
+    for (let i = 0; i < words.length; i++) {
+        const cleanWord = words[i].toLowerCase().trim();
+        if (cleanWord.length >= 2 && cleanWord.length <= 7) {
+            const signature = cleanWord.split('').sort().join('');
+            if (!signatureMap[signature]) {
+                signatureMap[signature] = [];
+            }
+            signatureMap[signature].push(cleanWord);
         }
-        signatureMap[signature].push(cleanWord);
-    });
-    isIndexed = true;
+    }
+    isReady = true;
 }
 
-// গ্লোবাল মেমোরি ইনিশিয়েলাইজেশন ট্রিগার
-initializeDictionary();
+prepareDictionary();
 
 module.exports = async (req, res) => {
-    // ক্রসব্রাউজার কানেকশন পলিসি সেটআপ
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -33,31 +31,32 @@ module.exports = async (req, res) => {
         return res.status(200).end();
     }
 
-    // গ্লোবাল মেমোরি কোনো কারণে স্লিপ করলে পুনরায় জাগানোর ব্যাকআপ প্রোটেকশন
-    initializeDictionary();
+    prepareDictionary();
 
     const input = req.query.input || '';
     const cleanInput = input.trim().toLowerCase();
     const inputLen = cleanInput.length;
     const resultsByLength = {};
 
-    // ২ থেকে ১৫ অক্ষরের কঠোর ব্যাকএন্ড ভ্যালিডেশন
+    // ২ থেকে ১৫ অক্ষরের কঠোর ব্যাকএন্ড লক
     if (inputLen < 2 || inputLen > 15) {
         return res.status(200).json({});
     }
 
     const inputCounts = {};
-    for (const char of cleanInput) {
+    for (let i = 0; i < cleanInput.length; i++) {
+        const char = cleanInput[i];
         inputCounts[char] = (inputCounts[char] || 0) + 1;
     }
 
-    // হাই-স্পিড সিগনেচার অ্যালগরিদম যা ১ মিলিসেকেন্ডে রেজাল্ট মেলায়
+    // টাইমআউট প্রতিরোধী আল্ট্রা-ফাস্ট অ্যানাগ্রাম লুপ
     for (const signature in signatureMap) {
         if (signature.length > inputLen) continue;
 
         let isMatch = true;
         const sigCounts = {};
-        for (const char of signature) {
+        for (let i = 0; i < signature.length; i++) {
+            const char = signature[i];
             sigCounts[char] = (sigCounts[char] || 0) + 1;
             if (!inputCounts[char] || sigCounts[char] > inputCounts[char]) {
                 isMatch = false;
