@@ -9,15 +9,11 @@
         body { background-color: #000; color: #00ff00; font-family: 'Courier New', Courier, monospace; padding: 15px; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
         
         .page-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; gap: 15px; }
-        
-        /* ১/৫ অ্যাড জোন: টপ ব্যানার (728x90) */
         .top-ad-zone { width: 100%; max-width: 728px; min-height: 90px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
         .main-content-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; align-items: flex-start; max-width: 100%; }
         
-        /* ২ ও ৩/৫ অ্যাড জোন: দুই পাশের সাইডবার (160x600) */
         .sidebar-ad-zone { width: 160px; height: 600px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; flex-shrink: 0; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
         
-        /* সেন্ট্রাল কন্টেইনার - নিয়ন গ্রিন + গোল্ডেন মিক্স গলো */
         .container { flex: 1; max-width: 750px; width: 100%; border: 3px solid #00ff00; padding: 25px; box-shadow: 0 0 25px #00ff00, inset 0 0 15px #ffd700; border-radius: 10px; background: #030303; text-align: center; overflow: hidden; }
         h1 { font-size: 2.6rem; margin-bottom: 25px; letter-spacing: 5px; text-shadow: 0 0 15px #00ff00, 0 0 5px #ffd700; color: #ffd700; font-weight: bold; word-wrap: break-word; }
         
@@ -34,7 +30,6 @@
         .slang-list { list-style: none; padding-left: 10px; }
         .slang-item { margin-bottom: 5px; font-size: 0.85rem; }
         
-        /* রেজাল্ট এরিয়া */
         .results-container { margin-top: 25px; text-align: left; width: 100%; }
         .length-section { margin-bottom: 15px; border: 1px solid #ffd700; padding: 12px; border-radius: 5px; background: #050505; box-shadow: 0 0 10px #003300, inset 0 0 5px #ffd700; width: 100%; overflow: hidden; }
         .length-title { font-size: 1.15rem; font-weight: bold; border-bottom: 1px solid #00ff00; padding-bottom: 5px; margin-bottom: 12px; color: #ffd700; text-shadow: 0 0 5px #ffd700; }
@@ -44,7 +39,6 @@
         .loading { font-size: 1.1rem; color: #ffff00; margin: 20px 0; display: none; text-shadow: 0 0 5px #ffff00; }
         .no-results { color: #ff9900; margin: 20px 0; font-size: 1rem; text-shadow: 0 0 5px #ff9900; }
         
-        /* ৪ ও ৫/৫ অ্যাড জোন: বটম ব্যানারস (300x250) */
         .bottom-ad-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
         .bottom-ad-zone { width: 300px; height: 250px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
 
@@ -65,51 +59,49 @@
 <body>
 
 <div class="page-wrapper">
-    <div class="top-ad-zone">
-        PLACE_TOP_AD_HERE
-    </div>
+    <div class="top-ad-zone">PLACE_TOP_AD_HERE</div>
 
     <div class="main-content-wrapper">
-        <div class="sidebar-ad-zone">
-            PLACE_LEFT_SIDEBAR_AD_HERE
-        </div>
+        <div class="sidebar-ad-zone">PLACE_LEFT_SIDEBAR_AD_HERE</div>
 
         <div class="container">
             <h1>JUMBLEVERSE</h1>
             
             <div class="input-group">
-                <input type="text" id="jumbleInput" placeholder="Enter scrambled letters..." autocomplete="off" inputmode="text" enterkeyhint="search">
+                <!-- ১৫ অক্ষরের টাইপিং রেস্ট্রিকশন ও কীবোর্ড অ্যাক্টিভেশন লক -->
+                <input type="text" id="jumbleInput" placeholder="Enter scrambled letters..." autocomplete="off" inputmode="text" enterkeyhint="search" maxlength="15">
                 <button id="solveBtn" onclick="processJumble()">SOLVE IT</button>
             </div>
-            <div class="notice">* ALLOWED: MIN 2 & MAX 15 LETTERS</div>
+            <div class="notice" id="noticeText">* ALLOWED: MIN 2 & MAX 15 LETTERS</div>
 
             <div id="loadingStatus" class="loading">SCANNING CODES & DICTIONARY...</div>
 
             <div id="errorBox" class="error-box">
-                <div id="errorBoxTitle" class="error-title">⚠️ HEX OFFENSIVE WORDS DETECTED</div>
+                <div id="errorBoxTitle" class="error-title">⚠️ SYSTEM ALERT</div>
                 <ul id="slangList" class="slang-list"></ul>
             </div>
 
             <div id="resultsArea" class="results-container"></div>
         </div>
 
-        <div class="sidebar-ad-zone">
-            PLACE_RIGHT_SIDEBAR_AD_HERE
-        </div>
+        <div class="sidebar-ad-zone">PLACE_RIGHT_SIDEBAR_AD_HERE</div>
     </div>
 
     <div class="bottom-ad-wrapper">
-        <div class="bottom-ad-zone">
-            PLACE_BOTTOM_AD_1_HERE
-        </div>
-        <div class="bottom-ad-zone">
-            PLACE_BOTTOM_AD_2_HERE
-        </div>
+        <div class="bottom-ad-zone">PLACE_BOTTOM_AD_1_HERE</div>
+        <div class="bottom-ad-zone">PLACE_BOTTOM_AD_2_HERE</div>
     </div>
 </div>
 
 <script>
     const badWords = ['penis', 'peni', 'sex', 'fuck', 'ass', 'bitch'];
+
+    // রিয়েলটাইম কিবোর্ড টাইপিং লক (১৫ অক্ষরের বেশি টাইপই করা যাবে না)
+    document.getElementById('jumbleInput').addEventListener('input', function(e) {
+        if (this.value.length > 15) {
+            this.value = this.value.slice(0, 15);
+        }
+    });
 
     async function processJumble() {
         const inputField = document.getElementById('jumbleInput');
@@ -125,13 +117,13 @@
         errorBox.style.display = 'none';
         slangList.innerHTML = '';
 
-        // ১. ইনপুট লক কন্ডিশন (২ থেকে ১৫ অক্ষরের নিয়ম প্রয়োগ)
+        // কড়া ইনপুট কন্ডিশন লক (২-১৫ অক্ষরের বাইরে সার্চ ব্লক)
         if (inputValue.length < 2 || inputValue.length > 15) {
             errorBox.style.display = 'block';
             errorBoxTitle.innerText = "⚠️ INPUT ERROR DETECTED";
             const li = document.createElement('li');
             li.className = 'slang-item';
-            li.innerText = "▲ SYSTEM LOCKED: Input must be between 2 and 15 letters only.";
+            li.innerText = "▲ ACTION BLOCKED: Letters must be between 2 and 15.";
             slangList.appendChild(li);
             return;
         }
@@ -140,7 +132,7 @@
         loadingStatus.style.display = 'block';
 
         try {
-            // সংশোধিত রিয়েল কানেকশন এন্ডপয়েন্ট (api/index.js ফাইলের জন্য)
+            // রিয়েল নোড ব্যাকএন্ড এন্ডপয়েন্ট কানেকশন
             const response = await fetch(`/api?input=${encodeURIComponent(inputValue)}`);
             if (!response.ok) throw new Error('Network error or server limit');
             
@@ -155,7 +147,7 @@
             sortedLengths.forEach(length => {
                 const wordLengthNum = parseInt(length);
                 
-                // ২. শব্দের দৈর্ঘ্য ফিল্টার (শুধুমাত্র ২ থেকে ৭ অক্ষরের শব্দ স্ক্রিনে আসবে)
+                // লক আর্কিটেকচার: শুধুমাত্র ২ থেকে ৭ অক্ষরের জেনারেটেড শব্দ দেখানো হবে
                 if (wordLengthNum >= 2 && wordLengthNum <= 7) {
                     const wordsArray = data[length] || [];
                     
@@ -176,4 +168,5 @@
                         section.className = 'length-section';
                         
                         const title = document.createElement('div');
-title.className = 'length-title';title.innerText = ${length} LETTER WORDS (${cleanWords.length});const grid = document.createElement('div');grid.className = 'word-grid';cleanWords.forEach(word => {const card = document.createElement('div');card.className = 'word-card';card.innerText = word.toUpperCase();grid.appendChild(card);});section.appendChild(title);section.appendChild(grid);resultsArea.appendChild(section);}}});if (detectedBadWords.length > 0) {errorBox.style.display = 'block';errorBoxTitle.innerText = "⚠️ HEX OFFENSIVE WORDS DETECTED";detectedBadWords.forEach(slang => {const li = document.createElement('li');li.className = 'slang-item';li.innerText = ▲ SLANG DETECTED & FILTERED: ${slang};slangList.appendChild(li);});}if (!hasWords) {resultsArea.innerHTML = 'No meaningful words (2-7 letters) found for these letters.';}} catch (error) {loadingStatus.style.display = 'none';resultsArea.innerHTML = <div class="no-results" style="color:red;">Error connecting to solver system: ${error.message}</div>;}}document.getElementById('jumbleInput').addEventListener('keydown', function(e) {if (e.key === 'Enter') {e.preventDefault();processJumble();}});
+                        title.className = 'length-title';
+title.innerText = ${length} LETTER WORDS (${cleanWords.length});const grid = document.createElement('div');grid.className = 'word-grid';cleanWords.forEach(word => {const card = document.createElement('div');card.className = 'word-card';card.innerText = word.toUpperCase();grid.appendChild(card);});section.appendChild(title);section.appendChild(grid);resultsArea.appendChild(section);}}});if (detectedBadWords.length > 0) {errorBox.style.display = 'block';errorBoxTitle.innerText = "⚠️ HEX OFFENSIVE WORDS DETECTED";detectedBadWords.forEach(slang => {const li = document.createElement('li');li.className = 'slang-item';li.innerText = ▲ SLANG DETECTED & FILTERED: ${slang};slangList.appendChild(li);});}if (!hasWords) {resultsArea.innerHTML = 'No meaningful words (2-7 letters) found for these letters.';}} catch (error) {loadingStatus.style.display = 'none';resultsArea.innerHTML = <div class="no-results" style="color:red;">Error connecting to solver system: ${error.message}</div>;}}document.getElementById('jumbleInput').addEventListener('keydown', function(e) {if (e.key === 'Enter') {e.preventDefault();processJumble();}});
