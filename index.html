@@ -1,17 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JUMBLEVERSE - Ultimate Word Solver</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #000; color: #00ff00; font-family: 'Courier New', Courier, monospace; padding: 15px; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+        .page-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; gap: 15px; }
+        .top-ad-zone { width: 100%; max-width: 728px; min-height: 90px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
+        .main-content-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; align-items: flex-start; max-width: 100%; }
+        .sidebar-ad-zone { width: 160px; height: 600px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; flex-shrink: 0; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
+        .container { flex: 1; max-width: 750px; width: 100%; border: 3px solid #00ff00; padding: 25px; box-shadow: 0 0 25px #00ff00, inset 0 0 15px #ffd700; border-radius: 10px; background: #030303; text-align: center; overflow: hidden; }
+        h1 { font-size: 2.6rem; margin-bottom: 25px; letter-spacing: 5px; text-shadow: 0 0 15px #00ff00, 0 0 5px #ffd700; color: #ffd700; font-weight: bold; word-wrap: break-word; }
+        .input-group { display: flex; gap: 10px; justify-content: center; margin-bottom: 12px; width: 100%; max-width: 100%; }
+        input { background: #000; border: 2px solid #00ff00; color: #ffd700; padding: 14px 15px; font-size: 1.2rem; font-family: inherit; flex: 1; min-width: 0; outline: none; border-radius: 5px; text-shadow: 0 0 5px #ffd700; }
+        input:focus { border-color: #ffd700; box-shadow: 0 0 20px #ffd700, inset 0 0 5px #00ff00; }
+        button { background: #ffd700; color: #000; border: none; padding: 14px 22px; font-size: 1.1rem; font-weight: bold; font-family: inherit; cursor: pointer; border-radius: 5px; transition: 0.3s; box-shadow: 0 0 15px #ffd700; flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
+        button:hover, button:active { background: #000; color: #00ff00; border: 2px solid #00ff00; box-shadow: 0 0 20px #00ff00; }
+        .notice { font-size: 0.85rem; color: #666; margin-bottom: 20px; letter-spacing: 1px; }
+        .error-box { border: 2px dashed #ff0000; color: #ff0000; padding: 15px; margin-top: 20px; border-radius: 5px; display: none; background: #100000; text-align: left; box-shadow: 0 0 10px #ff0000; word-wrap: break-word; }
+        .error-title { font-weight: bold; margin-bottom: 8px; }
+        .results-container { margin-top: 25px; text-align: left; width: 100%; }
+        .length-section { margin-bottom: 15px; border: 1px solid #ffd700; padding: 12px; border-radius: 5px; background: #050505; box-shadow: 0 0 10px #003300, inset 0 0 5px #ffd700; width: 100%; overflow: hidden; }
+        .length-title { font-size: 1.15rem; font-weight: bold; border-bottom: 1px solid #00ff00; padding-bottom: 5px; margin-bottom: 12px; color: #ffd700; text-shadow: 0 0 5px #ffd700; }
+        .word-grid { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
+        .word-card { background: #000; border: 1px solid #00ff00; color: #00ff00; padding: 6px 12px; border-radius: 4px; font-size: 1.05rem; box-shadow: 0 0 5px #004400; max-width: 100%; word-break: break-all; }
+        .loading { font-size: 1.1rem; color: #ffff00; margin: 20px 0; display: none; text-shadow: 0 0 5px #ffff00; }
+        .no-results { color: #ff9900; margin: 20px 0; font-size: 1rem; text-shadow: 0 0 5px #ff9900; }
+        .bottom-ad-wrapper { display: flex; gap: 15px; width: 100%; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+        .bottom-ad-zone { width: 300px; height: 250px; border: 2px dashed #ffd700; background: #050400; display: flex; align-items: center; justify-content: center; color: #443c00; font-size: 0.8rem; text-align: center; padding: 10px; border-radius: 5px; box-shadow: 0 0 10px #ffd700; overflow: hidden; }
+        @media (max-width: 992px) { .sidebar-ad-zone { display: none !important; } h1 { font-size: 2.2rem; } }
+        @media (max-width: 480px) { .input-group { flex-direction: column; gap: 10px; align-items: center; } input { width: 100%; text-align: center; padding: 14px; } button { width: 100%; padding: 14px; } h1 { font-size: 1.9rem; letter-spacing: 2px; } .top-ad-zone { min-height: 60px; font-size: 0.7rem; } .bottom-ad-zone { width: 100%; max-width: 300px; } }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <div class="top-ad-zone">PLACE_TOP_AD_HERE</div>
+    <div class="main-content-wrapper">
+        <div class="sidebar-ad-zone">PLACE_LEFT_SIDEBAR_AD_HERE</div>
+        <div class="container">
+            <h1>JUMBLEVERSE</h1>
+            <form class="input-group" id="jumbleForm" onsubmit="event.preventDefault(); processJumble();">
+                <input type="text" id="jumbleInput" placeholder="Enter scrambled letters..." autocomplete="off" inputmode="text" enterkeyhint="search" maxlength="15">
+                <button type="submit" id="solveBtn">SOLVE IT</button>
+            </form>
+            <div class="notice" id="noticeText">* ALLOWED: MIN 2 & MAX 15 LETTERS</div>
+            <div id="loadingStatus" class="loading">CONNECTING NEON CORE...</div>
+            <div id="errorBox" class="error-box">
+                <div id="errorBoxTitle" class="error-title">⚠️ SYSTEM ALERT</div>
+                <div id="errorMsg"></div>
+            </div>
+            <div id="resultsArea" class="results-container"></div>
+        </div>
+        <div class="sidebar-ad-zone">PLACE_RIGHT_SIDEBAR_AD_HERE</div>
+    </div>
+    <div class="bottom-ad-wrapper">
+        <div class="bottom-ad-zone">PLACE_BOTTOM_AD_1_HERE</div>
+        <div class="bottom-ad-zone">PLACE_BOTTOM_AD_2_HERE</div>
+    </div>
+</div>
+<script>
+    const badWords = ['penis', 'peni', 'sex', 'fuck', 'ass', 'bitch'];
+
+    document.getElementById('jumbleInput').addEventListener('input', function(e) {
+        if (this.value.length > 15) { this.value = this.value.slice(0, 15); }
+    });
+
+    async function processJumble() {
+        const inputField = document.getElementById('jumbleInput');
+        const resultsArea = document.getElementById('resultsArea');
+        const errorBox = document.getElementById('errorBox');
+        const errorMsg = document.getElementById('errorMsg');
+        const loadingStatus = document.getElementById('loadingStatus');
+        
+        resultsArea.innerHTML = '';
+        errorBox.style.display = 'none';
+        
+        let inputVal = inputField.value.toLowerCase().replace(/[^a-z]/g, '').trim();
+        if (inputVal.length < 2 || inputVal.length > 15) {
+            errorBox.style.display = 'block';
+            errorMsg.innerText = "Error: Input must be between 2 and 15 letters.";
+            return;
+        }
+        
+        if (badWords.some(bad => inputVal.includes(bad))) {
+            errorBox.style.display = 'block';
+            errorMsg.innerText = "System Alert: Inappropriate language detected.";
+            return;
+        }
+        loadingStatus.style.display = 'block';
         try {
-            // আপনার নিজস্ব Vercel সার্ভারলেস ব্যাকএন্ড এপিআই-কে কল করা হচ্ছে
             const res = await fetch('/api/solve?letters=' + inputVal);
             const data = await res.json();
             loadingStatus.style.display = 'none';
 
             if (!data.words || data.words.length === 0) {
-                resultsArea.innerHTML = '<div class="no-results">NO COMBINATIONS FOUND IN THE CLOUD CORE.</div>';
+                resultsArea.innerHTML = '<div class="no-results">NO COMBINATIONS FOUND. TRY "ELPPA" OR "ANANAB".</div>';
                 return;
             }
 
             let matchedWords = data.words;
             matchedWords.sort((a, b) => b.length - a.length || a.localeCompare(b));
-            
             let groups = {};
             matchedWords.forEach(word => {
                 let len = word.length;
@@ -40,7 +130,7 @@
         } catch (e) {
             loadingStatus.style.display = 'none';
             errorBox.style.display = 'block';
-            errorMsg.innerText = "CLOUD CORE ERROR. PLEASE REFRESH.";
+            errorMsg.innerText = "SYSTEM REBOOT COMPLETE. TRY AGAIN.";
             console.error(e);
         }
     }
